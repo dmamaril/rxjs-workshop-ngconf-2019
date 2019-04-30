@@ -1,0 +1,6 @@
+Private License
+
+This repository and it's contents are not to be used for any reason
+unless given explicit, written permission by Ben Lesh and/or RxWorkshop
+
+Questions: ben@benlesh.com
