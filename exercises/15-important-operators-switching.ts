@@ -1,5 +1,5 @@
 import {interval} from "rxjs";
-import {switchMap} from "rxjs/operators";
+import {map, switchMap} from "rxjs/operators";
 
 /**
  * **Switching**
@@ -38,5 +38,10 @@ import {switchMap} from "rxjs/operators";
  */
 
 interval(1000)
-    .pipe(switchMap(() => interval(333)))
+    .pipe(
+        switchMap((n) => {
+            return interval(100)
+                    .pipe(map(() => n));
+        })
+    )
     .subscribe(console.log);
