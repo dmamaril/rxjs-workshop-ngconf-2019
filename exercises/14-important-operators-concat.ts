@@ -31,6 +31,8 @@ import { concatAll, concatMap } from "rxjs/operators";
  *
  */
 
+// of(a$, b$, c$).pipe(concatAll()).subscribe(consoleMarbles());
 
+// of(a$, b$, c$).pipe(concatMap(x => x)).subscribe(consoleMarbles());
 
-
+concat(a$, b$, c$).subscribe(consoleMarbles());
