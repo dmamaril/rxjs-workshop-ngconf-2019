@@ -1,4 +1,5 @@
 import { theSongThatNeverEnds$ } from "./fixtures";
+import {Subscription} from "rxjs";
 
 /**
  * Make it stop!
@@ -25,8 +26,9 @@ import { theSongThatNeverEnds$ } from "./fixtures";
  */
 
 
-theSongThatNeverEnds$.subscribe({
+const sub$: Subscription = theSongThatNeverEnds$.subscribe({
   next: x => console.log(x),
   complete: () => console.log('The song ended on its own.'),
 });
 
+setTimeout(() => sub$.unsubscribe(), 5000);
