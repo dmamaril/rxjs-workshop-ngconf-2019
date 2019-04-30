@@ -1,6 +1,6 @@
-import { theSongThatNeverEnds$ } from "./fixtures";
-import { timer } from "rxjs";
-import { takeUntil } from "rxjs/operators";
+import {theSongThatNeverEnds$} from "./fixtures";
+import {timer} from "rxjs";
+import {takeUntil} from "rxjs/operators";
 
 /**
  * **takeUntil**
@@ -25,7 +25,10 @@ import { takeUntil } from "rxjs/operators";
 
 
 theSongThatNeverEnds$
-.subscribe({
-  next: x => console.log(x),
-  complete: () => console.log('done'),
-});
+    .pipe(
+        takeUntil(timer(2000))
+    )
+    .subscribe({
+        next: x => console.log(x),
+        complete: () => console.log('done'),
+    });
