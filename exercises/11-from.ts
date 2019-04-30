@@ -35,11 +35,22 @@ import { from } from "rxjs";
 
 const happyPromise = Promise.resolve('Hi!');
 const sadPromise = Promise.reject(':(');
+
 const numbersIterable = (function*() {
   for (let i = 0; i < 10; i++) {
     yield i;
   }
 }());
+
 const fruityArray = ['apples', 'oranges', 'bananas'];
 
 // TODO: Try it out below.
+from(happyPromise).subscribe(console.log);
+
+from(sadPromise).subscribe({
+    error: console.error
+});
+
+from(fruityArray).subscribe(console.log);
+
+from(numbersIterable).subscribe(console.log);
