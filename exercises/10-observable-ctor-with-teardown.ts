@@ -1,4 +1,5 @@
-import { Observable } from "rxjs";
+import {Observable, Subscription} from "rxjs";
+import {take} from "rxjs/operators";
 
 /**
  * Teardown
@@ -21,13 +22,28 @@ import { Observable } from "rxjs";
  */
 
 
- /**
-  * Creates an observable of incrementing numbers, starting at 0, and emitted
-  * every `t` milliseconds.
-  * @param t The delay between emissions, in milliseconds
-  */
- function myInterval(t: number) {
-   // TODO: Implement.
- }
+/**
+ * Creates an observable of incrementing numbers, starting at 0, and emitted
+ * every `t` milliseconds.
+ * @param t The delay between emissions, in milliseconds
+ */
+function myInterval(t: number) {
+    // TODO: Implement.
+    return new Observable<number>(subscriber => {
 
- myInterval(1000).subscribe(x => console.log(x));
+        let i: number = 0;
+        const id = setInterval(() => {
+            subscriber.next(i++);
+        }, t);
+
+        // teardown;
+        return () => {
+            console.log("teardown");
+            clearInterval(id);
+        }
+    });
+}
+
+myInterval(1000)
+    .pipe(take(5))
+    .subscribe(x => console.log(x));
