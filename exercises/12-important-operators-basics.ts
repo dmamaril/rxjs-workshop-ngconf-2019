@@ -58,7 +58,17 @@ interval(1000)
             return x
         }),
         filter(x => typeof x !== "number"),
-        scan((acc) => acc + 1, 0),
+        scan(
+            (acc: {}, curr: string) => {
+                acc[curr]++;
+                return acc;
+            },
+            {
+                fizz: 0,
+                buzz: 0,
+                fizzbuzz: 0
+            }
+        ),
         take(12)
     )
     .subscribe(console.log);
