@@ -1,6 +1,6 @@
 import { movieCharacters$, starWarsObserver, starTrekObserver, MovieCharacter } from "./fixtures";
 import { Subject } from "rxjs";
-import { filter } from "rxjs/operators";
+import {filter, switchMap} from "rxjs/operators";
 
 /**
  * **Subjects**
@@ -63,6 +63,23 @@ import { filter } from "rxjs/operators";
  * - There is a `MovieCharacter` type you can use to properly type your `Subject`.
  */
 
-movieCharacters$.subscribe(starWarsObserver);
-movieCharacters$.subscribe(starTrekObserver);
+// movieCharacters$.subscribe(starWarsObserver);
+// movieCharacters$.subscribe(starTrekObserver);
 
+const subject = new Subject<MovieCharacter>();
+
+// subject
+//     .pipe(filter(character => character.universe === 'Star Wars'))
+//     .subscribe(starWarsObserver);
+//
+// subject
+//     .pipe(filter(character => character.universe === 'Star Trek'))
+//     .subscribe(starTrekObserver);
+
+subject.subscribe(character => {
+    character.universe === "Star Wars"
+        ? starWarsObserver.next(character)
+        : starTrekObserver.next(character);
+});
+
+movieCharacters$.subscribe(subject);
