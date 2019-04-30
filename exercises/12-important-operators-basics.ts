@@ -40,3 +40,24 @@ import { map, filter, scan, take } from "rxjs/operators";
  * (Information about `interval` can be found here: https://rxjs.dev/api/index/function/interval)
  */
 
+interval(1000)
+    .pipe(
+        map(x => {
+            if (x % 5 === 0 && x % 3 === 0) {
+                return "fizzbuzz";
+            }
+
+            if (x % 3 === 0) {
+                return "fizz";
+            }
+
+            if (x % 5 === 0) {
+                return "buzz";
+            }
+
+            return x
+        }),
+        filter(x => typeof x !== "number"),
+        scan((acc) => acc + 1, 0),
+        take(12)
+    ).subscribe(console.log);
