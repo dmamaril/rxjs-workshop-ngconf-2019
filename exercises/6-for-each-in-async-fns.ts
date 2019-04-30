@@ -24,8 +24,16 @@ async function execute() {
 
   // TODO: log out `threeMenAndAnError$` here, but handle the
   // error by logging the error message.
+    try {
+
+      await threeMenAndAnError$.forEach(console.log);
+
+    } catch(err) {
+      console.log(err.message);
+    }
 
   // TODO: log the `threeAmigos$` here.
+  await threeAmigos$.forEach(console.log);
 
   console.log('All done. Much better.');
 }
