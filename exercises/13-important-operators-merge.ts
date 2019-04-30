@@ -1,4 +1,4 @@
-import { of, merge } from "rxjs";
+import {of, merge, from} from "rxjs";
 import { a$, b$, c$, consoleMarbles } from "./fixtures";
 import { mergeAll, mergeMap } from "rxjs/operators";
 
@@ -37,4 +37,10 @@ import { mergeAll, mergeMap } from "rxjs/operators";
  */
 
 
+// of(a$, b$, c$).pipe(mergeMap(x => x)).subscribe(consoleMarbles());
+
+of(a$, b$, c$).pipe(mergeAll()).subscribe(consoleMarbles());
+
+// similar to ^
+// merge(a$, b$, c$).subscribe(consoleMarbles());
 
