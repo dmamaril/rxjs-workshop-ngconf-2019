@@ -2,3 +2,4 @@ node_modules
 src/todo-app/node_modules
 exercises/todo-app/node_modules
 exercises_final/todo-app/node_modules
+.idea/**/*
