@@ -17,7 +17,7 @@ import { of } from "rxjs";
  */
 
  console.log('start');
- // TODO: Create an observable of values here and log it out, including completion.
+ of(1,2,3).subscribe(console.log);
  console.log('end');
 
  /**
