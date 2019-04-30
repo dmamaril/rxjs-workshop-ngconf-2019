@@ -1,5 +1,5 @@
-import { Observable } from 'rxjs';
-import { take } from 'rxjs/operators';
+import {Observable} from 'rxjs';
+import {take} from 'rxjs/operators';
 
 /**
  * Creating a new observable
@@ -47,13 +47,28 @@ import { take } from 'rxjs/operators';
 
 
 function emitSomeValues<T>(...values: T[]): Observable<T> {
+    // just a fancy wrapper fn to have subscriptions
+    return new Observable<T>(subscriber => {
+
+        // ensure subscriber is not closed by `take`
+        for (let i = 0 ; i < values.length && !subscriber.closed; i++) {
+            subscriber.next(values[i]);
+        }
+
+        // ensure sub ends
+        subscriber.complete();
+    });
 }
 
 
-const source$ =
-  emitSomeValues('dogs', 'and', 'cats', 'living together', 'mass hysteria!');
+const source$ = emitSomeValues('dogs', 'and', 'cats', 'living together', 'mass hysteria!');
 
-source$.subscribe({
-  next: x => console.log(x),
-  complete: () => console.log('done'),
-});
+source$
+    .pipe(
+        take(3)
+    )
+    .subscribe({
+        next: x => console.log(x),
+        complete: () => console.log('done'),
+    }
+);
