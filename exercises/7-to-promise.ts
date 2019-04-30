@@ -28,7 +28,7 @@ import { intergalacticPhoneCall } from "./fixtures";
 async function execute() {
   console.log('E.T. phone home...');
 
-
+  const message = await intergalacticPhoneCall("Hi Mom!").toPromise();
   console.log(message);
 }
 
