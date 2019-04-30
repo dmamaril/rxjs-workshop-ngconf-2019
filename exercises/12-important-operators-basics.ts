@@ -60,4 +60,5 @@ interval(1000)
         filter(x => typeof x !== "number"),
         scan((acc) => acc + 1, 0),
         take(12)
-    ).subscribe(console.log);
+    )
+    .subscribe(console.log);
